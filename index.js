@@ -14,6 +14,19 @@ let intervalTime = 1000 * 60 * 5;
     channelModel = new Channel();
     userModel = new User();
 
+    global.vkBot.command("мои подписки", async (ctx) => {
+        let user = await userModel.getUser(ctx.message.peer_id);
+        let subscribes = user.getSubscribes();
+        let subscribeList = "";
+
+        for (const subscribe of subscribes) {
+            let channel = await channelModel.getChannelByIdOrName(subscribe);
+            subscribeList += channel.getName() + "\n";
+        }
+
+        ctx.reply(subscribeList);
+    });
+
     global.vkBot.on(async (ctx) => {
         let channelId = await channelModel.parseChannelId(ctx.message.text);
         let peerId = ctx.message.peer_id;

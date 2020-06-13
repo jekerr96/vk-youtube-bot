@@ -4,7 +4,13 @@ const DB_NAME = "youtube";
 
 class MongoDb  {
     constructor() {
-        this.mongoClient = new MongoClient("mongodb://localhost:27017", {
+        let mongoUrl = "mongodb://localhost:27017";
+
+        if (process.env.mongo) {
+            mongoUrl = process.env.mongo;
+        }
+
+        this.mongoClient = new MongoClient(mongoUrl, {
             useNewUrlParser: true,
             useUnifiedTopology: true
         });
