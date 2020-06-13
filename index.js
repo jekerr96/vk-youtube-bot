@@ -10,6 +10,7 @@ let intervalTime = 1000 * 60 * 5;
 (async () => {
     global.dbConnection = await MongoDb.getConnection();
     global.vkBot = new VkBot("3e5feb1e40663e0082b251261ffffc783ad604f13758a9b64f84f7a343adb28e3483b7f78ec22c1faba01");
+    global.vkBot.sendMessage(69305433, "Bot has been started");
     channelModel = new Channel();
     userModel = new User();
 
